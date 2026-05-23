@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini Proモデル 最適運用ガイド</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- アイコン用のライブラリ -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* 日本語フォントをきれいに表示するための設定 */
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased leading-relaxed">
+
+    <!-- メインコンテナ -->
+    <main class="max-w-4xl mx-auto py-10 px-5 sm:px-8">
+        
+        <!-- ヘッダーセクション -->
+        <header class="text-center mb-12">
+            <div class="inline-flex items-center justify-center p-3 bg-indigo-100 rounded-full mb-4">
+                <i data-lucide="sparkles" class="w-8 h-8 text-indigo-600"></i>
+            </div>
+            <h1 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4 tracking-tight">Gemini Proモデル 最適運用ガイド</h1>
+            <p class="text-slate-600 sm:text-lg max-w-2xl mx-auto">
+                コンピューティングベースの消費システムを賢く乗り切り、<br class="hidden sm:block">日常的なタスクを効率よくこなすためのペース配分と戦略。
+            </p>
+        </header>
+
+        <!-- イントロダクション -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8 mb-10">
+            <p class="text-slate-700">
+                Flashモデルのラリーを避け、質の高い回答を<strong>Proモデルで一発で得る</strong>という戦略は、新しい「コンピューティングベース（計算量ベース）」の消費システムにおいて非常に有効です。<br><br>
+                具体的な「1日〇回」という上限はプロンプトの重さによって変動しますが、日常的な「コード作成」「複数パターンの提案」「図の作成」などをProモデルでこなすためのペース配分の目安とコツをまとめました。
+            </p>
+        </section>
+
+        <!-- セクション1: 5時間ブロック -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center pb-2 border-b border-slate-200">
+                <i data-lucide="clock" class="mr-3 text-indigo-500"></i>
+                1. 1日を「5時間のブロック」で捉える
+            </h2>
+            <p class="mb-6 text-slate-700">変更点の肝は「5時間ごとのリセット」です。1日の活動時間を、<strong>3つのブロック</strong>に分けて考えます。</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                <!-- ブロック1 -->
+                <div class="bg-blue-50 rounded-xl p-5 border border-blue-100">
+                    <h3 class="font-bold text-blue-900 flex items-center mb-2">
+                        <i data-lucide="sunrise" class="w-5 h-5 mr-2"></i>第1ブロック
+                    </h3>
+                    <p class="text-blue-800 text-sm font-mono bg-blue-100 inline-block px-2 py-1 rounded mb-2">9:00 - 14:00</p>
+                    <p class="text-blue-700 text-sm">午前中の作業や、最初の重いタスク（コード作成など）に。</p>
+                </div>
+                <!-- ブロック2 -->
+                <div class="bg-orange-50 rounded-xl p-5 border border-orange-100">
+                    <h3 class="font-bold text-orange-900 flex items-center mb-2">
+                        <i data-lucide="sun" class="w-5 h-5 mr-2"></i>第2ブロック
+                    </h3>
+                    <p class="text-orange-800 text-sm font-mono bg-orange-100 inline-block px-2 py-1 rounded mb-2">14:00 - 19:00</p>
+                    <p class="text-orange-700 text-sm">リセット完了。午後の調べものや、図の作成などに活用。</p>
+                </div>
+                <!-- ブロック3 -->
+                <div class="bg-indigo-50 rounded-xl p-5 border border-indigo-100">
+                    <h3 class="font-bold text-indigo-900 flex items-center mb-2">
+                        <i data-lucide="moon" class="w-5 h-5 mr-2"></i>第3ブロック
+                    </h3>
+                    <p class="text-indigo-800 text-sm font-mono bg-indigo-100 inline-block px-2 py-1 rounded mb-2">19:00 - 24:00</p>
+                    <p class="text-indigo-700 text-sm">夜のまとめや、翌日の準備のための構成案出しなどに。</p>
+                </div>
+            </div>
+            
+            <div class="bg-slate-800 text-white rounded-xl p-5">
+                <h4 class="font-bold mb-2 flex items-center"><i data-lucide="target" class="w-5 h-5 mr-2 text-green-400"></i>ペース配分の目安</h4>
+                <p class="text-slate-300 text-sm">
+                    1つのブロックにつき、<strong>「重い案件（コード作成から修正までの1タスクなど）を1〜2件終わらせる」</strong>くらいのイメージを持つのが安全です。もし第1ブロックで上限に達してしまっても、午後（第2ブロック）になればまたフルで使えるようになります。1日全体で使い切って何もできなくなる事態は避けられます。
+                </p>
+            </div>
+        </section>
+
+        <!-- セクション2: 3つの鉄則 -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center pb-2 border-b border-slate-200">
+                <i data-lucide="shield-check" class="mr-3 text-indigo-500"></i>
+                2. 消費を抑えて使い倒す「3つの鉄則」
+            </h2>
+            <p class="mb-6 text-slate-700">「ラリーを減らす」という戦略を最適化し、Proモデルの枠を長持ちさせるためのコツです。</p>
+
+            <div class="space-y-4">
+                <!-- 鉄則1 -->
+                <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm flex flex-col sm:flex-row gap-4 items-start">
+                    <div class="bg-red-100 p-3 rounded-lg text-red-600 shrink-0">
+                        <i data-lucide="message-square-plus" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-slate-900 mb-2">鉄則1：1案件終わったら「新しいチャット」にする <span class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded ml-2">超重要</span></h3>
+                        <p class="text-slate-600 text-sm">
+                            AIは過去の会話履歴をすべて読み込んでから回答するため、ラリーが続くほど1回あたりの消費クレジットが雪だるま式に増えます。コードが完成した、または図が書けた時点で、次の話題に移る際は<strong>必ず「新しいチャット」を立ち上げて</strong>ください。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 鉄則2 -->
+                <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm flex flex-col sm:flex-row gap-4 items-start">
+                    <div class="bg-emerald-100 p-3 rounded-lg text-emerald-600 shrink-0">
+                        <i data-lucide="list-checks" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-slate-900 mb-2">鉄則2：最初のプロンプトに「前提条件」を盛り込む</h3>
+                        <p class="text-slate-600 text-sm">
+                            「後から条件を付け足すラリー」を減らすため、最初の依頼で「どういうパターンの出力が欲しいか」「コードの前提となる環境は何か」を箇条書きで入れておくと、Proモデルの性能を1回の消費で最大限に引き出せます。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 鉄則3 -->
+                <div class="bg-white rounded-xl p-6 border border-slate-200 shadow-sm flex flex-col sm:flex-row gap-4 items-start">
+                    <div class="bg-amber-100 p-3 rounded-lg text-amber-600 shrink-0">
+                        <i data-lucide="cpu" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg text-slate-900 mb-2">鉄則3：「Deep Think（拡張思考）」はオフにする</h3>
+                        <p class="text-slate-600 text-sm">
+                            Deep Thinkは非常に重い処理を行うため、1〜2回の依頼で5時間の枠を使い切ってしまう可能性があります。日常的な用途や、通常のProモデルで十分な出力が得られるのであれば、設定でオフ（通常モード）にしておくのが無難です。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- セクション3: プランの見直し -->
+        <section class="mb-10">
+            <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center pb-2 border-b border-slate-200">
+                <i data-lucide="trending-up" class="mr-3 text-indigo-500"></i>
+                3. プランの見直し基準
+            </h2>
+            <p class="mb-6 text-slate-700">
+                まずは現在のプランのまま、上記の「5時間ブロックを意識する」「こまめに新しいチャットにする」運用を試してみてください。もし以下のサインが出たら、アップグレードの検討時期です。
+            </p>
+
+            <div class="bg-rose-50 border border-rose-200 rounded-xl p-6 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-1 h-full bg-rose-500"></div>
+                <h3 class="font-bold text-rose-900 mb-3 flex items-center">
+                    <i data-lucide="alert-circle" class="w-5 h-5 mr-2"></i>アップグレードを検討するサイン
+                </h3>
+                <ul class="list-disc list-inside text-rose-800 space-y-2 mb-4">
+                    <li>5時間ブロックの途中で、頻繁に「上限に達しました」というエラーが出る場合。</li>
+                    <li>週末など、特定の曜日に「週単位の上限」に引っかかってしまう場合。</li>
+                </ul>
+                <p class="text-sm text-rose-700">
+                    これらが発生し、作業が止まることがストレスになる場合は、「AI Plus（標準の2倍）」や「AI Pro（標準の4倍）」へのプラン変更を検討してください。逆に、現状でエラーが出ないなら、今の使い方とプランのバランスは完璧です！
+                </p>
+            </div>
+        </section>
+
+        <!-- フッター -->
+        <footer class="text-center text-slate-500 text-sm mt-12 pt-8 border-t border-slate-200">
+            <p>© 2026 AI Usage Strategy Guide. Saved for personal reference.</p>
+        </footer>
+
+    </main>
+
+    <!-- アイコンの初期化スクリプト -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
