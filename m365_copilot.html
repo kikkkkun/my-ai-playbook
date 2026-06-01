@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft 365 Copilot ノートブック フォルダ同期・連携ガイド</title>
+    <style>
+        :root {
+            --primary-color: #0f6cbd;
+            --primary-light: #e1f0fe;
+            --text-main: #323130;
+            --text-muted: #605e5c;
+            --bg-body: #faf9f8;
+            --bg-card: #ffffff;
+            --border-color: #edebe9;
+            --accent-green: #107c41;
+            --bg-green-light: #eaf6ed;
+            --accent-orange: #d83b01;
+            --bg-orange-light: #fde7e9;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-body);
+            font-size: 16px;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin: 2.5rem 0 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-light);
+        }
+
+        .step-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .step-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .step-number {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .step-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        ol, ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        .info-box {
+            border-left: 4px solid;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .info-box.concept {
+            border-color: var(--primary-color);
+            background-color: var(--primary-light);
+        }
+
+        .info-box.tip {
+            border-color: var(--accent-green);
+            background-color: var(--bg-green-light);
+        }
+
+        .info-box.warning {
+            border-color: var(--accent-orange);
+            background-color: var(--bg-orange-light);
+        }
+
+        .info-box h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .info-box.concept h4 { color: var(--primary-color); }
+        .info-box.tip h4 { color: var(--accent-green); }
+        .info-box.warning h4 { color: var(--accent-orange); }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 3rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            header {
+                padding: 2rem 1rem;
+            }
+            header h1 {
+                font-size: 1.5rem;
+            }
+            .step-card {
+                padding: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Copilot ノートブック連携ガイド</h1>
+        <p>SharePoint上の複数フォルダをリンクさせ、常に最新のファイル状態を参照・同期させる手順</p>
+    </header>
+
+    <div class="container">
+        
+        <div class="info-box concept">
+            <h4>Copilotの「ノートブック」機能とは？</h4>
+            <p>通常のチャットとは異なり、長文のプロンプトを構築したり、特定のファイルやフォルダを持続的なコンテキスト（参照元）として保持しながら、反復的に作業や思考を深めるための高度なワークスペースです。</p>
+        </div>
+
+        <h2 class="section-title">設定手順</h2>
+
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Copilot ノートブックを開く</h3>
+            </div>
+            <ol>
+                <li>Webブラウザで <strong>Microsoft 365 (microsoft365.com)</strong> にアクセスし、企業アカウントでサインインします。</li>
+                <li>アプリランチャーまたはサイドメニューから <strong>Copilot</strong> を起動します。</li>
+                <li>画面上部、または入力エリア付近にある <strong>「ノートブック (Notebook)」</strong> タブをクリックして、UIを切り替えます。</li>
+            </ol>
+        </div>
+
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-number">2</div>
+                <h3 class="step-title">SharePointフォルダのURLを取得する</h3>
+            </div>
+            <p>Copilotに参照させたいSharePoint上のフォルダ（社内用・社外用など）のリンクを取得します。</p>
+            <ol>
+                <li>SharePointのサイトを開き、対象のドキュメントライブラリまたはフォルダに移動します。</li>
+                <li>対象フォルダの右側にある三点リーダー「...」をクリックし、<strong>「リンクのコピー」</strong>を選択します。（※またはブラウザのアドレスバーのURLを直接コピーします）</li>
+            </ol>
+        </div>
+
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-number">3</div>
+                <h3 class="step-title">ノートブックにフォルダを「参照」として追加する</h3>
+            </div>
+            <ol>
+                <li>Copilot ノートブックの画面に戻ります。</li>
+                <li>プロンプト入力エリアの近くにある <strong>📎（添付アイコン）</strong> または <strong>「ファイルの追加」</strong> ボタンをクリックします。</li>
+                <li>表示されたメニューから <strong>「リンクを貼り付け」</strong>（またはそれに類するオプション）を選択し、手順2でコピーしたSharePointフォルダのURLを貼り付けて確定します。</li>
+                <li>参照リストにフォルダが追加されたことを確認します。これで、このフォルダ内のドキュメントがCopilotの思考プロセスに組み込まれました。</li>
+            </ol>
+        </div>
+
+        <div class="step-card">
+            <div class="step-header">
+                <div class="step-number">4</div>
+                <h3 class="step-title">複数フォルダ（社内・社外用）のリンク追加</h3>
+            </div>
+            <p>手順2と手順3を繰り返し、必要な別のフォルダ（例：社外パートナー共有用フォルダ、プロジェクトBのフォルダなど）を追加します。</p>
+            <ul>
+                <li>ノートブックの参照ソース一覧に、追加した複数のフォルダが並んでいれば成功です。</li>
+                <li>これにより、プロンプト内で「社内フォルダの要件定義と、社外フォルダの提案書を比較して」といった横断的な分析が可能になります。</li>
+            </ul>
+        </div>
+
+        <h2 class="section-title">仕組みと運用上のポイント</h2>
+
+        <div class="info-box concept">
+            <h4>🔄 最新ファイルが自動同期される仕組み</h4>
+            <p>ファイルを個別にアップロードするのではなく「フォルダのリンク」を指定することで、Copilotはバックエンドの <strong>Microsoft Graph とセマンティックインデックス</strong> を経由してデータにアクセスします。これにより、チームメンバーがSharePoint上のファイルを更新したり、新しくファイルを追加したりした場合でも、Copilotに質問する都度、自動的に最新のインデックス状態が参照されます（手動での再アップロードは不要です）。</p>
+        </div>
+
+        <div class="info-box tip">
+            <h4>💡 社内用・社外用フォルダを扱う際のTips</h4>
+            <ul>
+                <li><strong>プロンプトでの明確な指示:</strong> 複数のフォルダを参照している場合、出力に社外秘情報が混ざらないよう「社外向けフォルダ（URL名）の情報のみを使って要約して」など、対象を絞り込む指示をプロンプト内に入れると精度が高まります。</li>
+                <li><strong>目的別のノートブック運用:</strong> 非常に機密性の高い作業を行う場合は、社外用フォルダのリンクを一度削除するか、新しいノートブックセッションを立ち上げて参照元を切り分けることをお勧めします。</li>
+            </ul>
+        </div>
+
+        <div class="info-box warning">
+            <h4>⚠️ 権限とインデックスに関する注意点</h4>
+            <ul>
+                <li><strong>アクセス権限（RBAC）の原則:</strong> Copilotは「あなた（操作しているユーザー）」がアクセス権を持つファイルのみを読み取ります。フォルダをリンクさせても、フォルダ内の特定ファイルにあなたへのアクセス権がない場合、そのファイルは参照されません。</li>
+                <li><strong>同期のタイムラグ:</strong> SharePoint上でファイルが更新されてから、Copilotの検索インデックスに反映されるまで、システムの状況により数分〜数十分のタイムラグが発生する場合があります。直前の更新内容が反映されない場合は、少し待ってから再度実行してください。</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Microsoft 365 Copilot Operation Guide. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
